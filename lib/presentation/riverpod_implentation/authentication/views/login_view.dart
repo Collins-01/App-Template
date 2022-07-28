@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../states/states.dart';
 import '../viewmodels/viewmodels.dart';
+import '../../../../extensions/extensions.dart';
 
 class LoginView extends ConsumerWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -17,9 +18,13 @@ class LoginView extends ConsumerWidget {
           child: Scaffold(
             body: Column(
               children: [
+                SizedBox(
+                  height: context.percentageHeight(0.5),
+                ),
                 TextButton(
                   onPressed: () {
                     model.login('email', 'password');
+                    // ignore: invalid_use_of_protected_member, avoid_print
                     print(model.state.loginError);
                   },
                   child: const Text("Login"),
