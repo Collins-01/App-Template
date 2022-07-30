@@ -8,7 +8,10 @@ class AuthServiceImpl implements AuthService {
   Future<void> logOut() async {}
 
   @override
-  Future<void> login({required String email, required String password}) async {}
+  Future<void> login({required String email, required String password}) async {
+    await Future.delayed(const Duration(seconds: 3));
+    print("Done");
+  }
 
   @override
   Future<void> signUp() async {}
@@ -17,5 +20,5 @@ class AuthServiceImpl implements AuthService {
   User? get currentUser => _user;
 
   @override
-  bool get isAuthenticated => _user != null;
+  bool get isAuthenticated => false;
 }

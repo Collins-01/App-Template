@@ -14,14 +14,17 @@ class LoginViewModel extends StateNotifier<LoginViewModelState> {
   login(String email, String password) async {
     try {
       state = state.copyWith(status: LoginViewModelStatus.loading);
+      print(state.status.name);
       await _authRepository.login(email: email, password: password);
       state = state.copyWith(status: LoginViewModelStatus.success);
+      print(state.status.name);
       //Navigate To Next Page
     } catch (e) {
       //
       state = state.copyWith(
         status: LoginViewModelStatus.error,
       );
+      print(state.status.name);
     }
   }
 }

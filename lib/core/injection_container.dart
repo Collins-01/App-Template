@@ -8,11 +8,19 @@ GetIt locator = GetIt.instance;
 
 Future<void> setUpLocator() async {
   //local cache
-  final sharedPrefs = await SharedPreferences.getInstance();
-  locator.registerLazySingleton(() => sharedPrefs);
+  // final sharedPrefs = await SharedPreferences.getInstance();
+  // locator.registerLazySingleton(() => sharedPrefs);
+  // locator.registerLazySingleton<LocalCache>(
+  //   () => LocalCacheImpl(
+  //     sharedPreferences: sharedPrefs,
+  //   ),
+  // );
+  final sharedPreferences = await SharedPreferences.getInstance();
+  locator.registerSingleton(sharedPreferences);
+
   locator.registerLazySingleton<LocalCache>(
     () => LocalCacheImpl(
-      sharedPreferences: sharedPrefs,
+      sharedPreferences: sharedPreferences,
     ),
   );
 

@@ -11,30 +11,35 @@ class LoginView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.read(loginViewModelInstance.notifier);
-    return Consumer(
-      builder: (context, watch, child) {
-        var vm = watch.watch(loginViewModelInstance.notifier);
-        return LoaderPage(
-          child: Scaffold(
-            body: Column(
-              children: [
-                SizedBox(
-                  height: context.percentageHeight(0.5),
-                ),
-                TextButton(
-                  onPressed: () {
-                    model.login('email', 'password');
-                    // ignore: invalid_use_of_protected_member, avoid_print
-                    print(model.state.loginError);
-                  },
-                  child: const Text("Login"),
-                )
-              ],
+    return Scaffold(
+      body: Consumer(
+        builder: (context, watch, child) {
+          var vm = watch.watch(loginViewModelInstance);
+          return LoaderPage(
+            child: Scaffold(
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: context.percentageHeight(0.5),
+                  ),
+                  Center(
+                    child: TextButton(
+                      onPressed: () {
+                        model.login('email', 'password');
+                        // ignore: invalid_use_of_protected_member, avoid_print
+                        print(model.state.loginError);
+                      },
+                      child: const Text("Login"),
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-          isBusy: vm.state.status.isBusy,
-        );
-      },
+            isBusy: vm.status.isBusy,
+          );
+        },
+      ),
     );
   }
 }
