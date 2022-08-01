@@ -14,28 +14,44 @@ class HomeView extends ConsumerStatefulWidget {
 
 class _HomeViewState extends ConsumerState<HomeView> {
   @override
+  void initState() {
+    ref.read(homeViewModelInstance.notifier).getPosts();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final vm = ref.watch(homeViewModelInstance);
     return LoaderPage(
       child: Scaffold(
           appBar: AppBar(
-            title: const Text("Oriakhcolls01@gmail.com"),
+            title: const Text("oriakhcolls01@gmail.com"),
           ),
           body: StreamBuilder<List<Post>>(
             builder: (context, snapshot) {
               if (vm.status.isSuccess && snapshot.hasData) {
                 //
                 final data = snapshot.data as List<Post>;
-                return ListView.builder(
-                  itemBuilder: (_, index) => Text(data[index].name),
-                );
+                if (data.isNotEmpty) {
+                  return ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (_, index) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(data[index].name),
+                    ),
+                  );
+                }
+                return const BuildEmptyPosts();
               }
 
               if (vm.status.isBusy &&
                   (snapshot.data == null || snapshot.data!.isEmpty)) {
                 return const SizedBox.shrink();
               }
-              return const BuildEmptyPosts();
+              if (vm.status.isBusy) {
+                return const SizedBox.shrink();
+              }
+              return const SizedBox.shrink();
             },
             stream: vm.posts,
           )),

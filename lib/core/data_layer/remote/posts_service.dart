@@ -23,7 +23,9 @@ class PostsServiceImpl implements PostsService {
   Future<void> getPosts() async {
     try {
       var response = await _networkClient.get(EndPoints.getCharacters);
-      print(response);
+      final data = response['results'] as List;
+      final posts = data.map((e) => Post.fromJson(e)).toList();
+      _postsController.add(posts);
     } on Failure {
       rethrow;
     }

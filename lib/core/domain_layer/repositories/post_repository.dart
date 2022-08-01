@@ -31,7 +31,7 @@ class PostRepositoryImpl implements PostsRepository {
 
   @override
   // TODO: implement streamPostsList
-  Stream<List<Post>> get streamPostsList => throw UnimplementedError();
+  Stream<List<Post>> get streamPostsList => _postsService.streamPostsList;
 
   @override
   Future<void> updatePost(Post post) {
