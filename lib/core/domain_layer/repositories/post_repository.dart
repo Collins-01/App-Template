@@ -19,9 +19,8 @@ class PostRepositoryImpl implements PostsRepository {
   }
 
   @override
-  Future<void> getPosts() {
-    // TODO: implement getPosts
-    throw UnimplementedError();
+  Future<void> getPosts() async {
+    await _postsService.getPosts();
   }
 
   @override

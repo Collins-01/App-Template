@@ -1,11 +1,17 @@
 import 'package:app_template/core/injection_container.dart';
 import 'package:app_template/presentation/riverpod_implentation/authentication/authentication.dart';
+import 'package:app_template/presentation/riverpod_implentation/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:network_client/network_client.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setUpLocator();
+  NetworkClient.init(
+    '',
+    enableLogging: true,
+  );
   runApp(
     const ProviderScope(
       child: MyApp(),
@@ -25,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginView(),
+      home: const HomeView(),
     );
   }
 }

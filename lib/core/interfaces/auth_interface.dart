@@ -2,6 +2,7 @@ import 'package:app_template/core/models/user_model.dart';
 
 abstract class AuthInterface {
   Future<void> login({required String email, required String password});
+  Future<bool> init();
   Future<void> signUp();
   Future<void> logOut();
   User? get currentUser;

@@ -25,4 +25,9 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   bool get isAuthenticated => _authService.isAuthenticated;
+
+  @override
+  Future<bool> init() async {
+    return false;
+  }
 }

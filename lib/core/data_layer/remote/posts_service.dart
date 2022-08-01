@@ -1,9 +1,12 @@
+import 'package:app_template/core/data_layer/endpoints.dart';
 import 'package:app_template/core/interfaces/posts_interface.dart';
 import 'package:app_template/core/models/post_model.dart';
+import 'package:network_client/network_client.dart';
 import 'package:rxdart/rxdart.dart';
 
 class PostsServiceImpl implements PostsService {
   final _postsController = BehaviorSubject<List<Post>>.seeded([]);
+  final _networkClient = NetworkClient();
   @override
   Future<void> createPost(Post post) {
     // TODO: implement createPost
@@ -17,9 +20,13 @@ class PostsServiceImpl implements PostsService {
   }
 
   @override
-  Future<void> getPosts() {
-    // TODO: implement getPosts
-    throw UnimplementedError();
+  Future<void> getPosts() async {
+    try {
+      var response = await _networkClient.get(EndPoints.getCharacters);
+      print(response);
+    } on Failure {
+      rethrow;
+    }
   }
 
   @override

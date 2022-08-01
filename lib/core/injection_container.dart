@@ -25,7 +25,8 @@ Future<void> setUpLocator() async {
   );
 
   //* Registering Auth
-  locator.registerLazySingleton<AuthService>(() => AuthServiceImpl());
+  locator.registerLazySingleton<AuthService>(
+      () => AuthServiceImpl(localCacheImpl: locator()));
   locator.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(
       authService: locator(),

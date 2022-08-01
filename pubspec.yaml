@@ -41,6 +41,8 @@ dependencies:
   flutter_riverpod: ^1.0.3
   freezed_annotation: ^2.1.0
   flutter_spinkit:
+  network_client:
+    git: https://github.com/Collins-01/Network-Client
 
 dev_dependencies:
   flutter_test:

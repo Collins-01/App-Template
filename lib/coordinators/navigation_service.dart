@@ -10,4 +10,6 @@ class NavigationService {
   goBack() {
     Navigator.of(navigatorKey.currentState!.context).pop();
   }
+  //TODO:
+  //Navigate to Different Pages with different types of animations
 }
